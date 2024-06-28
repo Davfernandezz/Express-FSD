@@ -1,51 +1,57 @@
+import 'dotenv/config';
 import express from 'express';
+import { createAuthor, deleteAuthorById, updateAuthorById } from './controllers/author.controllers';
+import { getBooks, createBooks, deleteBookById, updateBookById } from './controllers/book.controllers';
+
 
 const app = express();
 
+//middleware
+
 app.use(express.json())
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 4000;
 
-app.get('/healthy', (req, res)=>{
-res.send('Server is healthy');
+app.get('/healthy', (req, res) => {
+
+    res.status(200).json(
+        {
+            success: true,
+            message: "Server is healthy"
+        }
+    )
 })
 
 
-app.post('/authors', (req, res)=>{
-console.log(req.body);
-console.log(req.body.name);
-console.log(req.body.nationality);
+//AUTHORS
 
-    res.send('authors CREATED')
-})
+//POST
+app.post('/authors', createAuthor)
 
+//PUT
+app.put('/authors/:id', updateAuthorById);
 
-app.put('/authors/:id', (req, res)=>{
-    console.log(req.params.id)
-    res.send(`authors UPDATED with id: ${req.params.id}`)
-})
-
-app.delete('/authors/:id', (req, res)=>{
-    res.send(`authors DELETED with id: ${req.params.id}`)
-})
+//DELETE
+app.delete('/authors/:id', deleteAuthorById);
 
 
-app.get('/books', (req, res)=>{
-    res.send('GET ALL BOOKS')
-})
 
-app.post('/books', (req, res)=>{
-    res.send('BOOK CREATED')
-})
+//BOOKS
 
-app.put('/books', (req, res)=>{
-    res.send('BOOK UPDATED')
-})
+//GET
+app.get('/books', getBooks);
 
-app.delete('/books', (req, res)=>{
-    res.send('BOOK DELETED')
-})
+//POST
+app.post('/books', createBooks);
 
-app.listen(PORT, () =>{
-    console.log(`Server is running on port ${PORT}`);
+
+//PUT
+app.put('/books/:id', updateBookById);
+
+//DELETE
+app.delete('/books/:id', deleteBookById);
+
+
+app.listen(PORT, () => {
+    console.log(`Server is running. on port ${PORT}`);
 })
