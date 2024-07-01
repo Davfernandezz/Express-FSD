@@ -1,6 +1,9 @@
-import "reflect-metadata"
-import { DataSource } from "typeorm"
-
+import "reflect-metadata";
+import 'dotenv/config';
+import { DataSource } from "typeorm";
+import { Author1719825063867 } from "./migrations/1719825063867-author";
+import { User1719830267980 } from "./migrations/1719830267980-user";
+import { Book1719832355608 } from "./migrations/1719832355608-book";
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -10,6 +13,7 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     entities: [],
+    migrations: [Author1719825063867, User1719830267980, Book1719832355608],
     synchronize: false,
     logging: false,
 })
