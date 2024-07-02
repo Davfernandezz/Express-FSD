@@ -43,7 +43,7 @@ export const createAuthor = async (req: Request, res: Response) => {
 
 
         //5.responder
-        res.json({
+        res.status(200).json({
             success: true,
             message: 'Author created succesfully',
             data: newAuthor
@@ -69,7 +69,7 @@ export const getAuthor = async (req: Request, res: Response) => {
         const authors = await Author.find()
 
         //2.responder
-        res.json({
+        res.status(200).json({
             success: true,
             message: "All authors retrieved succesfully",
             data: authors
@@ -90,13 +90,42 @@ export const getAuthor = async (req: Request, res: Response) => {
 
 
 //UPDATE
-export const updateAuthorById = (req: Request, res: Response) => {
-    console.log(req.params.id);
+export const updateAuthorById = async (req: Request, res: Response) => {
+    try {
 
-    res.json({
-        success: true,
-        message: `AUTHOR UPDATED with id: ${req.params.id}`
-    })
+        //1.recuperar informacion
+        const authorIdToUpdate = req.params.id
+        const body = req.body
+
+        //2.validar informacion
+
+        //3.tratar informacion
+
+        //4.actualizar en base de datos
+
+        const authorUpdated = await Author.update(
+            {
+                id: parseInt(authorIdToUpdate)
+            },
+            body
+        )
+
+        //5.responder
+        res.status(200).json({
+            success: true,
+            message: "author updated",
+            date: authorUpdated
+        })
+        
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "author cant be updated",
+                error: error
+            }
+        )
+    }
 }
 
 
