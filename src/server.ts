@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import { createAuthor, deleteAuthorById, updateAuthorById } from './controllers/author.controllers';
+import { createAuthor, deleteAuthorById, getAuthor, updateAuthorById } from './controllers/author.controllers';
 import { getBooks, createBooks, deleteBookById, updateBookById } from './controllers/book.controllers';
 import { AppDataSource } from './database/db';
 
@@ -35,7 +35,8 @@ app.put('/authors/:id', updateAuthorById);
 //DELETE
 app.delete('/authors/:id', deleteAuthorById);
 
-
+//GET
+app.get('/authors', getAuthor);
 
 //BOOKS
 
