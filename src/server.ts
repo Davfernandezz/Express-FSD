@@ -3,7 +3,7 @@ import express from 'express';
 import { createAuthor, deleteAuthorById, getAuthor, updateAuthorById } from './controllers/author.controllers';
 import { getBooks, createBooks, deleteBookById, updateBookById } from './controllers/book.controllers';
 import { AppDataSource } from './database/db';
-import { register } from './controllers/auth.controller';
+import { login, register } from './controllers/auth.controller';
 
 
 const app = express();
@@ -62,6 +62,7 @@ app.delete('/books/:id', deleteBookById);
 
 //POST
 app.post('/register', register)
+app.post('/login', login)
 
 
 
