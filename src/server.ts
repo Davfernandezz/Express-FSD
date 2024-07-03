@@ -3,6 +3,7 @@ import express from 'express';
 import { createAuthor, deleteAuthorById, getAuthor, updateAuthorById } from './controllers/author.controllers';
 import { getBooks, createBooks, deleteBookById, updateBookById } from './controllers/book.controllers';
 import { AppDataSource } from './database/db';
+import { register } from './controllers/auth.controller';
 
 
 const app = express();
@@ -54,6 +55,13 @@ app.put('/books/:id', updateBookById);
 
 //DELETE
 app.delete('/books/:id', deleteBookById);
+
+
+
+//USER
+
+//POST
+app.post('/register', register)
 
 
 

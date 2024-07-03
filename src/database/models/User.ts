@@ -24,7 +24,7 @@ export class User extends BaseEntity{
     @Column({name: "created_at"})
     created_at!: Date
 
-    @Column({name: "updted_at"})
+    @Column({name: "updated_at"})
     updted_at!: Date
 }
 
