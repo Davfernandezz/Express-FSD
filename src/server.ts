@@ -5,6 +5,7 @@ import { getBooks, createBooks, deleteBookById, updateBookById } from './control
 import { AppDataSource } from './database/db';
 import { login, register } from './controllers/auth.controller';
 import { getAllUsers } from './controllers/user.controller';
+import { auth } from './middlewares/auth';
 
 
 const app = express();
@@ -29,7 +30,7 @@ app.get('/healthy', (req, res) => {
 //AUTHORS
 
 //POST
-app.post('/authors', createAuthor)
+app.post('/authors', auth, createAuthor)
 
 //PUT
 app.put('/authors/:id', updateAuthorById);
@@ -38,7 +39,7 @@ app.put('/authors/:id', updateAuthorById);
 app.delete('/authors/:id', deleteAuthorById);
 
 //GET
-app.get('/authors', getAuthor);
+app.get('/authors',auth, getAuthor);
 
 
 
@@ -67,6 +68,8 @@ app.post('/login', login)
 
 
 // USER
+
+//GET
 app.get('/users', getAllUsers)
 
 
