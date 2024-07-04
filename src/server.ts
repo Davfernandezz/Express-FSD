@@ -4,6 +4,7 @@ import { createAuthor, deleteAuthorById, getAuthor, updateAuthorById } from './c
 import { getBooks, createBooks, deleteBookById, updateBookById } from './controllers/book.controllers';
 import { AppDataSource } from './database/db';
 import { login, register } from './controllers/auth.controller';
+import { getAllUsers } from './controllers/user.controller';
 
 
 const app = express();
@@ -64,6 +65,9 @@ app.delete('/books/:id', deleteBookById);
 app.post('/register', register)
 app.post('/login', login)
 
+
+// USER
+app.get('/users', getAllUsers)
 
 
 AppDataSource.initialize()

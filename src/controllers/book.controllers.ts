@@ -1,10 +1,6 @@
 import { Request, Response } from "express";
 import { Book } from "../database/models/Book";
 
-//GET
-export const getBooks = (req: Request, res: Response) => {
-    res.send('GET ALL BOOKS')
-}
 
 //POST
 export const createBooks = async (req: Request, res: Response) => {
@@ -73,3 +69,27 @@ export const deleteBookById = (req: Request, res: Response) => {
         message: `BOOK DELETED With id: ${req.params.id}`
     })
 }
+
+
+//GET
+export const getBooks = async(req: Request, res: Response) => {
+    try {
+      // 1.Recuperar los libros
+      const books = await Book.find()
+   
+      res.json(
+       {
+         success: true,
+         message: "Books retrieved",
+         data: books
+       }
+      )
+    } catch (error) {
+       res.status(500).json(
+         {
+           success: false,
+           message: "error retrieving books"
+         }
+       )
+    }
+   }
