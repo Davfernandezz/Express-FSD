@@ -33,13 +33,13 @@ app.get('/healthy', (req, res) => {
 app.post('/authors', auth, createAuthor)
 
 //PUT
-app.put('/authors/:id', updateAuthorById);
+app.put('/authors/:id', auth, updateAuthorById);
 
 //DELETE
 app.delete('/authors/:id', deleteAuthorById);
 
 //GET
-app.get('/authors',auth, getAuthor);
+app.get('/authors', getAuthor);
 
 
 
