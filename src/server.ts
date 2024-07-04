@@ -4,7 +4,7 @@ import { createAuthor, deleteAuthorById, getAuthor, updateAuthorById } from './c
 import { getBooks, createBooks, deleteBookById, updateBookById } from './controllers/book.controllers';
 import { AppDataSource } from './database/db';
 import { login, register } from './controllers/auth.controller';
-import { getAllUsers } from './controllers/user.controller';
+import { getAllUsers, getUserProfile } from './controllers/user.controller';
 import { auth } from './middlewares/auth';
 
 
@@ -71,6 +71,7 @@ app.post('/login', login)
 
 //GET
 app.get('/users', getAllUsers)
+app.get('/profile', auth, getUserProfile)
 
 
 AppDataSource.initialize()
