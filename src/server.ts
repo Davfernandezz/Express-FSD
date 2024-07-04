@@ -6,6 +6,7 @@ import { AppDataSource } from './database/db';
 import { login, register } from './controllers/auth.controller';
 import { getAllUsers, getUserProfile } from './controllers/user.controller';
 import { auth } from './middlewares/auth';
+import { isAdmin } from './middlewares/isAdmin';
 
 
 const app = express();
@@ -51,7 +52,6 @@ app.get('/books', getBooks);
 //POST
 app.post('/books', createBooks);
 
-
 //PUT
 app.put('/books/:id', updateBookById);
 
@@ -60,18 +60,18 @@ app.delete('/books/:id', deleteBookById);
 
 
 
-//USER
+// USER
+
+//GET
+app.get('/users',auth, isAdmin, getAllUsers)
+app.get('/profile', auth, getUserProfile)
+
+
+//AUTH
 
 //POST
 app.post('/register', register)
 app.post('/login', login)
-
-
-// USER
-
-//GET
-app.get('/users', getAllUsers)
-app.get('/profile', auth, getUserProfile)
 
 
 AppDataSource.initialize()
