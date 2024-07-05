@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Book } from "./Book"
 
 @Entity('authors')
 export class Author extends BaseEntity{
@@ -12,4 +13,6 @@ export class Author extends BaseEntity{
     @Column({name: "nationality"})
     nationality!: string
 
+    @OneToMany(()=> Book, book => book.author)
+    books!: Book[]
 }

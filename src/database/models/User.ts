@@ -1,4 +1,6 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Favourite } from "./Favourite"
+
 
 @Entity('users')
 export class User extends BaseEntity{
@@ -26,5 +28,10 @@ export class User extends BaseEntity{
 
     @Column({name: "updated_at"})
     updted_at!: Date
+
+    @OneToMany(()=> Favourite, favourite => favourite.user)
+    favourite_books!: Favourite[]
+    
+
 }
 

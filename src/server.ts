@@ -4,9 +4,10 @@ import { createAuthor, deleteAuthorById, getAuthor, updateAuthorById } from './c
 import { getBooks, createBooks, deleteBookById, updateBookById } from './controllers/book.controllers';
 import { AppDataSource } from './database/db';
 import { login, register } from './controllers/auth.controller';
-import { getAllUsers, getUserProfile } from './controllers/user.controller';
+import { getAllUsers, getUserFavouritesBooks, getUserProfile } from './controllers/user.controller';
 import { auth } from './middlewares/auth';
 import { isAdmin } from './middlewares/isAdmin';
+import { createFavourite, deleteFavouritesById } from './controllers/favourites.controller';
 
 
 const app = express();
@@ -65,6 +66,16 @@ app.delete('/books/:id', deleteBookById);
 //GET
 app.get('/users',auth, isAdmin, getAllUsers)
 app.get('/profile', auth, getUserProfile)
+app.get('/users/fauvorites', auth, getUserFavouritesBooks)
+
+
+//FAVOURITES
+
+//POST
+app.post('/favourites',auth, createFavourite);
+
+//DELETE
+app.delete('/favourites/:id',auth, deleteFavouritesById);
 
 
 //AUTH

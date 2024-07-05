@@ -26,7 +26,8 @@ export const getAllUsers = async (req: Request, res: Response) => {
         res.status(500).json(
             {
                 success: false,
-                message: "error retrieving users"
+                message: "error retrieving users",
+                error: error
             }
         )
     }
@@ -60,7 +61,47 @@ export const getUserProfile = async (req: Request, res: Response) => {
         res.status(500).json(
             {
                 success: false,
-                message: "Profile cant be retrieved"
+                message: "Profile cant be retrieved",
+                error: error
+            }
+        )
+    }
+}
+
+export const getUserFavouritesBooks = async (req: Request, res: Response) => {
+    try {
+        // 1. Recuperar el id del usuario que hace la petición a través de token
+        const userId = req.tokenData.id
+        const getUserFavouritesBooks = await User.findOne({
+            select:{
+                id: true,
+                email: true
+            },
+            where: {
+                id: userId
+            },
+            relations: {
+                favourite_books: {
+                    book: {
+                        author: true
+                    }
+                }
+            }
+
+        })
+        res.json(
+            {
+                success: true,
+                message: "All fauvorite books retrieved succesfully",
+                data: getUserFavouritesBooks
+            }
+        )
+    } catch (error) {
+        res.status(500).json(
+            {
+                success: false,
+                message: "Error retrieving favourite books",
+                error: error
             }
         )
     }

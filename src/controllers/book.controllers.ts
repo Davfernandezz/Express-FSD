@@ -12,7 +12,7 @@ export const createBooks = async (req: Request, res: Response) => {
         const author_id = req.body.author_id
 
         //2.validacion
-        if (!tittle||!description||!author_id) {
+        if (!tittle || !description || !author_id) {
             return res.status(400).json(
                 {
                     success: false,
@@ -72,24 +72,40 @@ export const deleteBookById = (req: Request, res: Response) => {
 
 
 //GET
-export const getBooks = async(req: Request, res: Response) => {
+export const getBooks = async (req: Request, res: Response) => {
     try {
-      // 1.Recuperar los libros
-      const books = await Book.find()
-   
-      res.json(
-       {
-         success: true,
-         message: "Books retrieved",
-         data: books
-       }
-      )
+        // 1.Recuperar los libros
+        const books = await Book.find(
+            {
+                select: {
+                    tittle: true,
+                    description: true,
+                    author: {
+                        id: true,
+                        name: true,
+                        nationality: true
+                    }
+                },
+                relations: {
+                    author: true
+                }
+            }
+        )
+
+        res.json(
+            {
+                success: true,
+                message: "Books retrieved",
+                data: books
+            }
+        )
     } catch (error) {
-       res.status(500).json(
-         {
-           success: false,
-           message: "error retrieving books"
-         }
-       )
+        res.status(500).json(
+            {
+                success: false,
+                message: "error retrieving books",
+                error: error
+            }
+        )
     }
-   }
+}
