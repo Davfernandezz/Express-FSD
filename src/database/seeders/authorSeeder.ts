@@ -53,7 +53,6 @@ const createAuthors = async (authors: any) => {
   const newAUthors: Author[] = []
 
   authors.forEach((element: any, index: any) => {
-    console.log(index);
     
     const author = new Author();
     author.id = index + 1;
