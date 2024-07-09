@@ -11,7 +11,7 @@
     "revert:migrations": "npx typeorm-ts-node-commonjs migration:revert -d ./src/database/db.ts",
     "db:drop": "npx typeorm-ts-node-commonjs schema:drop -d ./src/database/db.ts",
     "db:seed": "npx ts-node ./src/database/seeders/dbSeeder.ts",
-    "db refresh": "npm run db:drop && npm run migrate && npm run db:seed.ts"
+    "db:refresh": "npm run db:drop && npm run migrate && npm run db:seed"
   },
   "author": "",
   "license": "ISC",

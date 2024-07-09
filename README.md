@@ -38,23 +38,29 @@ $ npm i ts-node -D
 $ npm i dotenv
 ```
 
-## connection to db
+## Connection to db
 
 ```sh
 $ npm i typeorm
 ```
 
-### migration example
+### Migration example
 ```sh
 npx typeorm migration:create ./src/database/migrations/user
 ```
 
-### encrypt password
+### Encrypt password
 ```sh
 npm i bcrypt
 ```
 ``` sh
 npm i --save-dev @types/bcrypt
+```
+
+## Update database
+
+``` sh
+npm run db:refresh
 ```
 
 ## Stack
