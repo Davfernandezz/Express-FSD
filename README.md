@@ -2,36 +2,59 @@
 
 ## Steps to follow
 
-``` sh
+```sh
 $ git init
 ```
 
-``` sh
+```sh
 $ npm init
 ```
 
-``` sh
+```sh
 $ npm i express
 ```
 
-``` sh
+```sh
 $ npm i --save-dev @types/express
 ```
 
-``` sh
+```sh
 $ npm i typescript -D
 ```
 
-``` sh
+```sh
 $ npx tsc
 ```
 
-``` sh
+```sh
 $ npm i nodemon -D
 ```
 
-``` sh
+```sh
 $ npm i ts-node -D
+```
+
+```sh
+$ npm i dotenv
+```
+
+## connection to db
+
+```sh
+$ npm i typeorm
+```
+
+### migration example
+```sh
+npx typeorm migration:create ./src/database/migrations/user
+```
+
+### encrypt password
+```sh
+npm i bcrypt
+```
+``` sh
+npm i --save-dev @types/bcrypt
 ```
 
 ## Stack
